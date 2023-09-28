@@ -9,20 +9,24 @@ const characterAI = new CharacterAI();
 async function initialize() {
   await characterAI.authenticateAsGuest();
   
-  const characterId = "RQrrOj-UNdEV2_PC5D03US-27MZ7EUtaRH_husjbRQA";
-  const chat = await characterAI.createOrContinueChat(characterId);
+  
   
   app.get('/', async (req, res) => {
+    const characterId = req.query.cid || "gF1ORZXTZIvZqprJaIPpE-aLLavJrNXYZLiKJ-ktRkY";
     
-    const prompt = req.query.prompt;
+    const chat = await characterAI.createOrContinueChat(characterId);
+
+    const prompt = req.query.prompt||"Hey!";
+
     const response = await chat.sendAndAwaitResponse(prompt, true);
-    res.json({ text: response.text });
+
+    res.json({ text: response.text, prompt:prompt });    
   });
 }
 
 (async () => {
   await initialize();
   app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on port http://localhost:${port}`);
   });
 })();

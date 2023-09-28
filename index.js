@@ -12,15 +12,16 @@ async function initialize() {
   
   
   app.get('/', async (req, res) => {
-    const characterId = req.query.cid || "gF1ORZXTZIvZqprJaIPpE-aLLavJrNXYZLiKJ-ktRkY";
-    
-    const chat = await characterAI.createOrContinueChat(characterId);
-
-    const prompt = req.query.prompt||"Hey!";
-
-    const response = await chat.sendAndAwaitResponse(prompt, true);
-
-    res.json({ text: response.text, prompt:prompt });    
+    try {
+      const characterId = req.query.cid || "gF1ORZXTZIvZqprJaIPpE-aLLavJrNXYZLiKJ-ktRkY";
+      const chat = await characterAI.createOrContinueChat(characterId);
+      const prompt = req.query.prompt || "Hey!";
+      const response = await chat.sendAndAwaitResponse(prompt, true);
+      res.json({ text: response.text, prompt: prompt });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "An error occurred" });
+    }
   });
 }
 

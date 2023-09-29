@@ -5,11 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node node_modules/puppeteer/install.js"
-  },
-  "env": {
-    "PUPPETEER_CACHE_DIR": "/tmp/puppeteer-cache"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tofu",
   "license": "ISC",

@@ -6,6 +6,8 @@ const port = 8000;
 
 const characterAI = new CharacterAI();
 
+characterAI.puppeteerPath = "/usr/bin/chromium-browser";
+
 async function initialize() {
   await characterAI.authenticateAsGuest();
   

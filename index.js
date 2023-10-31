@@ -9,9 +9,11 @@ const characterAI = new CharacterAI();
 async function initialize() {
   await characterAI.authenticateAsGuest();
   
+  app.get('/', (req,res)=>{
+      const resp = {redirect:"/msg?prompt=Hey&cid=gF1ORZXTZIvZqprJaIPpE-aLLavJrNXYZLiKJ-ktRkY"}
+  })
   
-  
-  app.get('/', async (req, res) => {
+  app.get('/msg', async (req, res) => {
     try {
       const characterId = req.query.cid || "gF1ORZXTZIvZqprJaIPpE-aLLavJrNXYZLiKJ-ktRkY";
       const chat = await characterAI.createOrContinueChat(characterId);
